@@ -10,7 +10,7 @@ public class Level
 {
     public int gridSizeX;
     public int gridSizeY;
-    public bool levelCompleted=false;
+    public bool levelCompleted = false;
 
     public List<CellData> resultCells = new List<CellData>();
 
@@ -31,7 +31,7 @@ public class LevelData
     public int level;
     public int gridSizeX;
     public int gridSizeY;
-    public bool levelCompleted=false;
+    public bool levelCompleted = false;
 
     public List<CellData> resultCells = new List<CellData>();
 
@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
     public Text levelText;
     public Text winPanelLevelText;
     private int totalLevels = 100;
-     public bool[] completedLevels = new bool[100];
+    public bool[] completedLevels = new bool[100];
     void Start()
     {
         // currentLvelIndex = LoadLevel();
@@ -99,14 +99,15 @@ public class LevelManager : MonoBehaviour
         currentLevel = levelsData[currentLvelIndex];
         UpdateSliderValue(currentLvelIndex);
     }
-  public void  MarkLevelComplete(){
-    Debug.Log("mark level completed");
-    completedLevels[currentLvelIndex]=true;
-    gameManager.SaveUserData();
-    CheckCompletedLevels();
-    NextLevel();
-  }
-     public void SkipLevel()
+    public void MarkLevelComplete()
+    {
+        Debug.Log("mark level completed");
+        completedLevels[currentLvelIndex] = true;
+        gameManager.SaveUserData();
+        CheckCompletedLevels();
+        NextLevel();
+    }
+    public void SkipLevel()
     {
         Debug.Log("Level Up");
         currentLvelIndex++;
@@ -149,8 +150,8 @@ public class LevelManager : MonoBehaviour
     }
     private void UpdateSliderValue(int level)
     {
-        levelText.text = (level + 1).ToString() ;
-        winPanelLevelText.text="Level "+(level + 1).ToString() ;
+        levelText.text = (level + 1).ToString();
+        winPanelLevelText.text = "Level " + (level + 1).ToString();
         // float sliderValue = (float)(level + 1) / totalLevels;
         // slider.value = sliderValue;
     }
@@ -176,40 +177,47 @@ public class LevelManager : MonoBehaviour
         levelsData = lvs.Levels;
     }
 
-   public void PlayCustomLevel(int index){
-    currentLevel = levelsData[index];
-    tileMap.StartGame();
-    menu.gameObject.SetActive(false);
-    UpdateSliderValue(index);
+    public void PlayCustomLevel(int index)
+    {
+        currentLvelIndex = index;
+        currentLevel = levelsData[index];
+        tileMap.StartGame();
+        menu.gameObject.SetActive(false);
+        UpdateSliderValue(index);
 
-   }
-   void CheckCompletedLevels(){
+    }
+    void CheckCompletedLevels()
+    {
 
-       for(int i = 0; i <completedLevels.Length ; i++) {
-        if(completedLevels[i]){
-            MarkLevelCompleted(i);
+        for (int i = 0; i < completedLevels.Length; i++)
+        {
+            if (completedLevels[i])
+            {
+                MarkLevelCompleted(i);
+
+            }
 
         }
-    
-      }
-   }
-   int pageNum=0;
-   int levelsPerPage=16;
-   void MarkLevelCompleted(int _index){
-
-    // if(_index>0 && (_index%16) ==0 )pageNum++;
-    pageNum=_index/levelsPerPage;
-    int _currentIndex=_index-(levelsPerPage*pageNum);
-     Debug.Log(_currentIndex);
-     Debug.Log("pageNUm :"+pageNum +" _index :"+_index);
-     pages[pageNum].transform.GetChild(_currentIndex).GetChild(0).GetComponent<Ricimi.AnimatedButton>().interactable=true;
-
-    for(int i = 1; i < 4; i++) {
-         pages[pageNum].transform.GetChild(_currentIndex).GetChild(i).GetChild(3).gameObject.SetActive(true);
-        
     }
-   
-    
+    int pageNum = 0;
+    int levelsPerPage = 16;
+    void MarkLevelCompleted(int _index)
+    {
 
-   }
+        // if(_index>0 && (_index%16) ==0 )pageNum++;
+        pageNum = _index / levelsPerPage;
+        int _currentIndex = _index - (levelsPerPage * pageNum);
+        Debug.Log(_currentIndex);
+        Debug.Log("pageNUm :" + pageNum + " _index :" + _index);
+        pages[pageNum].transform.GetChild(_currentIndex).GetChild(0).GetComponent<Ricimi.AnimatedButton>().interactable = true;
+
+        for (int i = 1; i < 4; i++)
+        {
+            pages[pageNum].transform.GetChild(_currentIndex).GetChild(i).GetChild(3).gameObject.SetActive(true);
+
+        }
+
+
+
+    }
 }
