@@ -79,7 +79,7 @@ public class MouseController : MonoBehaviour
         if (hit && hit.transform.gameObject.GetComponent<Tile>() != null && hit.transform.gameObject.GetComponent<Tile>().Show && !hit.transform.gameObject.GetComponent<Tile>().Locked)
         {
 
-            //Debug.LogError("MouseToTileHit");
+            // Debug.LogError("MouseToTileHit");
             return hit.transform.gameObject.GetComponent<Tile>();
         }
         //Debug.Log("Found nothing.");

@@ -133,6 +133,7 @@ public class Tile : MonoBehaviour
         set
         {
             _show = value;
+            this.gameObject.transform.GetComponent<BoxCollider2D>().enabled = value;
 
             if (value)
             {

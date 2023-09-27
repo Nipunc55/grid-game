@@ -320,7 +320,7 @@ public class TileMap : MonoBehaviour
 
 
                         cpos.x += ((0.8f * (2 * cons1) * cons + 0.8f) * 2 / Colomns) * scalemultiplier / 5;
-                        cpos.y -= ((r * 1.4f - 1.24f) * 2 / Rows) * scalemultiplier / 5;
+                        cpos.y -= ((r * 1.4f - 1.24f) * 2 / Colomns) * scalemultiplier / 5;
                     }
                     else if (t.requiredTileCount == 5 || t.requiredTileCount == 6)
                     {
@@ -332,7 +332,7 @@ public class TileMap : MonoBehaviour
 
 
                         cpos.x += ((0.32f * (2 * (2 - cons1)) * cons - 0.2f) * 1.8f / Colomns) * scalemultiplier / 5;
-                        cpos.y -= ((r * 1.4f - 1.24f) * 2 / Rows) * scalemultiplier / 5;
+                        cpos.y -= ((r * 1.4f - 1.24f) * 2 / Colomns) * scalemultiplier / 5;
                     }
                     else
                     {
