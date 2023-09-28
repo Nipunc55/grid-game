@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
+using System;
+
+
 
 public class RewardedAds : MonoBehaviour
 {
@@ -70,13 +73,20 @@ public class RewardedAds : MonoBehaviour
 
     if (rewardedAd != null && rewardedAd.CanShowAd())
     {
-        rewardedAd.Show((Reward reward) =>
+        try
         {
-            // TODO: Reward the user.
-            // Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
-            tileMap.NextLevel();
-
-        });
+            rewardedAd.Show((Reward reward) =>
+            {
+                // Debug.LogError("reward ad show");
+                // TODO: Reward the user.
+                // Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
+                tileMap.NextLevel();
+            });
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error showing rewarded ad: " + e.Message);
+        }
     }
     
 }
