@@ -92,7 +92,7 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevel()
     {
-        Debug.Log("Level Up");
+       
         currentLvelIndex++;
         SaveLevel(currentLvelIndex);
 

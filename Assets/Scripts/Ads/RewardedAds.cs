@@ -10,6 +10,7 @@ using System;
 public class RewardedAds : MonoBehaviour
 {
     public TileMap tileMap;
+    bool rewarded =false;
     public void Start()
     {
         // Initialize the Google Mobile Ads SDK.
@@ -73,21 +74,29 @@ public class RewardedAds : MonoBehaviour
 
     if (rewardedAd != null && rewardedAd.CanShowAd())
     {
-        try
-        {
+        
             rewardedAd.Show((Reward reward) =>
             {
                 // Debug.LogError("reward ad show");
                 // TODO: Reward the user.
                 // Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
-                tileMap.NextLevel();
+                rewarded=true;
+               
+                
+                 
+                
             });
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Error showing rewarded ad: " + e.Message);
-        }
+        
+        
     }
     
 }
+private void Update() {
+    if(rewarded){
+           tileMap.NextLevel();
+           rewarded=false;
+
+    }
+}
+
 }
