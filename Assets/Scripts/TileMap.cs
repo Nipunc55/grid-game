@@ -217,9 +217,9 @@ public class TileMap : MonoBehaviour
         {
             scalemultiplier = 4;
         }
-        else
+        else 
         {
-            scalemultiplier = 5;
+            scalemultiplier = 4;
         }
 
         CanvasScal.x = scalemultiplier;

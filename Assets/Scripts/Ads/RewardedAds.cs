@@ -78,6 +78,6 @@ public class RewardedAds : MonoBehaviour
 
         });
     }
-    LoadRewardedAd();
+    
 }
 }
