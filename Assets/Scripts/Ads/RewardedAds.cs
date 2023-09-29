@@ -95,6 +95,7 @@ private void Update() {
     if(rewarded){
            tileMap.NextLevel();
            rewarded=false;
+           LoadRewardedAd();
 
     }
 }
