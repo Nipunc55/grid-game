@@ -133,7 +133,8 @@ public class Tile : MonoBehaviour
         set
         {
             _show = value;
-            this.gameObject.transform.GetComponent<BoxCollider2D>().enabled = value;
+
+            this.gameObject.transform.GetComponent<BoxCollider2D>().enabled = value;
 
             if (value)
             {
@@ -142,7 +143,8 @@ public class Tile : MonoBehaviour
                 tempColor.a = 1f;
                 image.color = tempColor;
                 this.transform.GetChild(0).gameObject.SetActive(true);
-                this.transform.GetChild(0).transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = requiredTileCount.ToString();
+                this.transform.GetChild(1).gameObject.SetActive(true);
+                this.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = requiredTileCount.ToString();
             }
             else
             {
@@ -151,9 +153,12 @@ public class Tile : MonoBehaviour
                 tempColor.a = 0;
                 image.color = tempColor;
                 this.transform.GetChild(0).gameObject.SetActive(false);
+                this.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
     }
+
+
 
     private int _fillTilesCount;
 
@@ -169,11 +174,11 @@ public class Tile : MonoBehaviour
             FillCELLS = value;
             if (value == requiredTileCount && Show)
             {
-               // In your other script
-           if (HapticFeedbackManager.instance != null)
+                // In your other script
+                if (HapticFeedbackManager.instance != null)
                 {
-                   HapticFeedbackManager.instance.HeavyVibration();
-               }
+                    HapticFeedbackManager.instance.HeavyVibration();
+                }
                 // Handheld.Vibrate();
                 PlaceChas();
                 Locked = true;

@@ -209,15 +209,16 @@ public class TileMap : MonoBehaviour
 
         float scalemultiplier = 5;
 
+
         if (Colomns <= 2)
         {
-            scalemultiplier = 3;
+            scalemultiplier = 2;
         }
         else if (Colomns <= 4)
         {
-            scalemultiplier = 4;
+            scalemultiplier = 3;
         }
-        else 
+        else
         {
             scalemultiplier = 4;
         }
@@ -334,7 +335,7 @@ public class TileMap : MonoBehaviour
                         cpos.x += ((0.32f * (2 * (2 - cons1)) * cons - 0.2f) * 1.8f / Colomns) * scalemultiplier / 5;
                         cpos.y -= ((r * 1.4f - 1.24f) * 2 / Colomns) * scalemultiplier / 5;
                     }
-                    else
+                    else if (t.requiredTileCount == 7 || t.requiredTileCount == 8)
                     {
                         int q = p % 3;
                         int r = p / 3;
@@ -344,7 +345,19 @@ public class TileMap : MonoBehaviour
 
 
                         cpos.x += ((0.25f * (2 * cons1) * cons) * 3 / Colomns) * scalemultiplier / 5;
-                        cpos.y -= ((s * (2 * cons1) + r * 0.6f - 0.8f) * 3 / Rows) * scalemultiplier / 5;
+                        cpos.y -= ((s * (2 * cons1) + r * 0.6f - 1f) * 3 / Rows) * scalemultiplier / 5;
+                    }
+                    else
+                    {
+                        int q = p % 3;
+                        int r = p / 3;
+                        float s = 0.2f / t.requiredTileCount;
+                        float cons = Mathf.Pow(-1f, q);
+                        float cons1 = Mathf.Round((q + 1) / 2);
+
+
+                        cpos.x += ((0.25f * (2 * cons1) * cons) * 3f / Colomns) * scalemultiplier / 5;
+                        cpos.y -= ((s * (2 * cons1) + r * 0.6f - 1.2f) * 1.8f / Rows) * scalemultiplier / 5;
                     }
 
 
