@@ -114,13 +114,14 @@ public class TileMap : MonoBehaviour
             _controlTile = value;
             if (value != null)
             {
+                value.ControlDir = Tile.Direction.None;
                 SpriteRenderer image = value.transform.GetComponent<SpriteRenderer>();
                 var tempColor = image.color;
                 tempColor.a = 1f;
                 image.color = tempColor;
             }
 
-
+            
         }
     }
     public void StartGame()

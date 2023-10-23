@@ -18,7 +18,7 @@ public class MouseController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         TileUnderMouse = MouseToTile();
@@ -28,45 +28,62 @@ public class MouseController : MonoBehaviour
             if (TileUnderMouse != null)
             {
                 tileMap.ControlTile = TileUnderMouse;
+
             }
         }
         else if (Input.GetMouseButtonUp(0))
         {
             if (tileMap.ControlTile != null)
             {
-                tileMap.ControlTile.OnReleased();
+                tileMap.ControlTile.OnReleased();                
                 tileMap.ControlTile = null;
             }
+
+            lastMousePosition = Vector3.zero;
         }
 
-
-        Vector3 currentMousePosition = Input.mousePosition;
+        //lastMousePosition = Vector3.zero;
+        Vector3 currentMousePosition = Vector3.zero;
+        currentMousePosition = Input.mousePosition;
 
         // Calculate the difference in mouse position between frames
-        float deltaX = currentMousePosition.x - lastMousePosition.x;
-        float deltaY = currentMousePosition.y - lastMousePosition.y;
+        float deltaX = 0;
+        deltaX = currentMousePosition.x - lastMousePosition.x;
+        float deltaY = 0;
+        deltaY = currentMousePosition.y - lastMousePosition.y;
 
         // Update the lastMousePosition for the next frame
         lastMousePosition = currentMousePosition;
 
-        // Check if the mouse is moving horizontally
-        if (Mathf.Abs(deltaX) > Mathf.Abs(deltaY)) // You can adjust this threshold value to control sensitivity
+        if (Mathf.Abs(deltaY) + Mathf.Abs(deltaX) > 20f)
         {
-            if (tileMap.ControlTile != null)
+
+            // Check if the mouse is moving horizontally
+            if (Mathf.Abs(deltaX) > Mathf.Abs(deltaY) ) // You can adjust this threshold value to control sensitivity
             {
-                Vector3 ScreenmousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                tileMap.ControlTile.OnHorizontalDrag(ScreenmousePosition.x);
+                if (tileMap.ControlTile != null)
+                {
+                    Vector3 ScreenmousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    tileMap.ControlTile.OnHorizontalDrag(ScreenmousePosition.x);
+                }
+
+
+                //Debug.LogError("Hor");
+            }
+            else if (Mathf.Abs(deltaY) > 3f * Mathf.Abs(deltaX) + 10f)
+            {
+
+                if (tileMap.ControlTile != null)
+                {
+                    Vector3 ScreenmousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    tileMap.ControlTile.OnVerticalDrag(ScreenmousePosition.y);
+                }
+
+                //Debug.LogError("Ver");
             }
         }
-        else if (Mathf.Abs(deltaX) < Mathf.Abs(deltaY))
-        {
-            
-            if (tileMap.ControlTile != null)
-            {
-                Vector3 ScreenmousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                tileMap.ControlTile.OnVerticalDrag(ScreenmousePosition.y);
-            }
-        }
+
+        
     }
 
     Tile MouseToTile()
