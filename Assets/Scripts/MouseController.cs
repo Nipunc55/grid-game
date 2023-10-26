@@ -33,13 +33,15 @@ public class MouseController : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
+            lastMousePosition = Vector3.zero;
+
             if (tileMap.ControlTile != null)
             {
                 tileMap.ControlTile.OnReleased();                
                 tileMap.ControlTile = null;
             }
 
-            lastMousePosition = Vector3.zero;
+            
         }
 
         //lastMousePosition = Vector3.zero;
@@ -55,7 +57,7 @@ public class MouseController : MonoBehaviour
         // Update the lastMousePosition for the next frame
         lastMousePosition = currentMousePosition;
 
-        if (Mathf.Abs(deltaY) + Mathf.Abs(deltaX) > 20f)
+        if (Mathf.Abs(deltaY) + Mathf.Abs(deltaX) > 10f)
         {
 
             // Check if the mouse is moving horizontally
@@ -70,7 +72,7 @@ public class MouseController : MonoBehaviour
 
                 //Debug.LogError("Hor");
             }
-            else if (Mathf.Abs(deltaY) > 3f * Mathf.Abs(deltaX) + 10f)
+            else if (Mathf.Abs(deltaY) > 1.5f * Mathf.Abs(deltaX) + 5f)
             {
 
                 if (tileMap.ControlTile != null)
